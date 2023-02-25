@@ -1,2 +1,2 @@
 # CoraL
-Python codes for CoraL: Interpretable Supervised Contrastive Meta-learning Framework to Enhance Cancer-associated ncPEPs Prediction
+Python codes for the paper "CoraL".
