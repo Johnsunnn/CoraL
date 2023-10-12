@@ -17,19 +17,18 @@ def get_meta_train_config():
     parse.add_argument('-num_workers', type=int, default=4)
 
     # 路径参数
-    parse.add_argument('-path-token2index', type=str, default='./data/residue2idx.pkl', help='保存字典的位置')
-    parse.add_argument('-path-meta-dataset', type=str, default='./data/different_quantity_experiment/quantity_54',
+    parse.add_argument('-path-token2index', type=str, default='./Datasets/residue2idx.pkl', help='保存字典的位置')
+    parse.add_argument('-path-meta-dataset', type=str, default='./Datasets/ncPEP_for_meta-learning',
                        help='元学习数据的位置')
     parse.add_argument('-path-params', type=str, default=None, help='模型参数路径')
-    # parse.add_argument('-path-save', type=str, default='./result/', help='保存字典的位置')
-    parse.add_argument('-path-save', type=str, default='./result/different_quantity_experiment/', help='保存字典的位置')
+    parse.add_argument('-path-save', type=str, default='./result/', help='保存字典的位置')
     parse.add_argument('-model-save-name', type=str, default='MIMML', help='保存模型的命名')
     # parse.add_argument('-model-save-name', type=str, default='ProtoNet', help='保存模型的命名')
     parse.add_argument('-save-figure-type', type=str, default='png', help='保存图片的文件类型')
 
     # 数据参数
-    parse.add_argument('-max-len', type=int, default=207, help='max length of input sequences')
-    # parse.add_argument('-max-len', type=int, default=52, help='max length of input sequences')
+    # parse.add_argument('-max-len', type=int, default=207, help='max length of input sequences')
+    parse.add_argument('-max-len', type=int, default=52, help='max length of input sequences')
     # parse.add_argument('-max-len', type=int, default=12729, help='max length of input sequences')
     parse.add_argument('-dataset', type=str, default='Peptide Sequence', help='数据集')
     # parse.add_argument('-dataset', type=str, default='RNA Sequence', help='数据集')
@@ -49,7 +48,6 @@ def get_meta_train_config():
     # 训练参数
     parse.add_argument('-model', type=str, default='ProtoNet', help='元学习模型名称')
     parse.add_argument('-backbone', type=str, default='TextCNN', help='元学习骨架模型名称')
-    # parse.add_argument('-backbone', type=str, default='Transformer Encoder', help='元学习骨架模型名称')
     parse.add_argument('-optimizer', type=str, default='Adam', help='优化器名称')
     # parse.add_argument('-optimizer', type=str, default='AdamW', help='优化器名称')
     parse.add_argument('-loss-func', type=str, default='FL', help='损失函数名称, CE/FL')
@@ -120,14 +118,6 @@ def get_meta_train_config():
     # parse.add_argument('-lr-step-size', type=int, default=10)
     # parse.add_argument('-gamma', type=int, default=0.9)
 
-    # Transformer Encoder 模型参数配置
-    # parse.add_argument('-num-layer', type=int, default=6, help='number of encoder blocks')
-    # parse.add_argument('-num-head', type=int, default=8, help='number of head in multi-head attention')
-    # parse.add_argument('-dim-embedding', type=int, default=32, help='residue embedding dimension')
-    # parse.add_argument('-dim-feedforward', type=int, default=32, help='hidden layer dimension in feedforward layer')
-    # parse.add_argument('-dim-k', type=int, default=32, help='embedding dimension of vector k or q')
-    # parse.add_argument('-dim-v', type=int, default=32, help='embedding dimension of vector v')
-
     # TextCNN Finetune 模型参数
     parse.add_argument('-dim-embedding', type=int, default=128, help='词（残基）向量的嵌入维度')
     parse.add_argument('-dropout', type=float, default=0.5, help='dropout率')
@@ -144,7 +134,7 @@ def get_meta_train_config():
 
 
 config = get_meta_train_config()
-config.learn_name = 'meta_train_quantity_54'
+config.learn_name = ''
 
 # config.path_params = './result/pretrain/model/CNN, Epoch[20.000].pt'
 # config.threshold = 0.60
