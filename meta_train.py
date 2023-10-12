@@ -77,13 +77,9 @@ def get_meta_train_config():
     # parse.add_argument('-reg', type=float, default=0.001)
     parse.add_argument('-reg', type=float, default=0.0000)
 
-    # parse.add_argument('-num-meta-train', type=int, default=24)
-    # parse.add_argument('-num-meta-valid', type=int, default=10)
-    # parse.add_argument('-num-meta-test', type=int, default=10)
-
-    parse.add_argument('-num-meta-train', type=int, default=54)
-    parse.add_argument('-num-meta-valid', type=int, default=0)
-    parse.add_argument('-num-meta-test', type=int, default=0)
+    parse.add_argument('-num-meta-train', type=int, default=24)
+    parse.add_argument('-num-meta-valid', type=int, default=10)
+    parse.add_argument('-num-meta-test', type=int, default=10)
 
     # parse.add_argument('-train-way', type=int, default=5)
     # parse.add_argument('-train-shot', type=int, default=5)
