@@ -15,10 +15,10 @@ def get_config():
     parse.add_argument('-seed', type=int, default=50)
 
     # 路径参数
-    parse.add_argument('-path-token2index', type=str, default='./data/residue2idx.pkl', help='保存字典的位置')
-    parse.add_argument('-path-train-data', type=str, default='./data/task_data/IL-6/Train.tsv', help='训练数据的位置')
-    parse.add_argument('-path-test-data', type=str, default='./data/task_data/IL-6/Validate.tsv', help='测试数据的位置')
-    parse.add_argument('-path-dataset', type=str, default='./data/task_data/Meta Dataset/BPD-ALL-RT',
+    parse.add_argument('-path-token2index', type=str, default='./Datasets/residue2idx.pkl', help='保存字典的位置')
+    parse.add_argument('-path-train-data', type=str, default='', help='训练数据的位置')
+    parse.add_argument('-path-test-data', type=str, default='', help='测试数据的位置')
+    parse.add_argument('-path-dataset', type=str, default='./Datasets/task_data/Meta Dataset/BPD-ALL-RT',
                        help='多分类训练数据的位置')
     parse.add_argument('-path-params', type=str, default=None, help='模型参数路径')
     parse.add_argument('-path-save', type=str, default='./result/', help='保存字典的位置')
@@ -38,20 +38,14 @@ def get_config():
     parse.add_argument('-interval-log', type=int, default=40, help='经过多少batch记录一次训练状态')
     parse.add_argument('-interval-valid', type=int, default=1, help='经过多少epoch对交叉验证集进行测试')
     parse.add_argument('-interval-test', type=int, default=1, help='经过多少epoch对测试集进行测试')
-    # parse.add_argument('-metric', type=str, default='MCC', help='评估指标名称')
     parse.add_argument('-metric', type=str, default='MCC', help='评估指标名称')
-    # parse.add_argument('-threshold', type=float, default=0.45, help='指标率阈值')
     parse.add_argument('-threshold', type=float, default=0.40, help='指标率阈值')
 
     # 训练参数
     parse.add_argument('-model', type=str, default='TextCNN', help='模型名称')
-    # parse.add_argument('-model', type=str, default='Transformer Encoder', help='模型名称')
-    # parse.add_argument('-optimizer', type=str, default='AdamW', help='优化器名称')
     parse.add_argument('-optimizer', type=str, default='Adam', help='优化器名称')
     parse.add_argument('-loss-func', type=str, default='contrast loss', help='损失函数名称, CE/contrast loss')
     # parse.add_argument('-loss-func', type=str, default='CE', help='损失函数名称, CE/contrast loss')
-    # parse.add_argument('-lr', type=float, default=0.0001, help='学习率')
-    # parse.add_argument('-lr', type=float, default=0.0003, help='学习率')
     parse.add_argument('-lr', type=float, default=0.0005, help='学习率')
     parse.add_argument('-reg', type=float, default=0.0025, help='正则化lambda')
     # parse.add_argument('-epoch', type=int, default=50, help='迭代次数')
@@ -61,17 +55,6 @@ def get_config():
     # Focal Loss参数
     parse.add_argument('-gamma', type=float, default=2, help='gamma in Focal Loss')
     parse.add_argument('-alpha', type=float, default=0.01, help='alpha in Focal Loss')
-
-    # Transformer Encoder 模型参数
-    # # parse.add_argument('-num-layer', type=int, default=3, help='Transformer的Encoder模块的堆叠层数')
-    # parse.add_argument('-num-layer', type=int, default=6, help='Transformer的Encoder模块的堆叠层数')
-    # parse.add_argument('-dropout', type=float, default=0.5, help='dropout率')
-    # parse.add_argument('-static', type=bool, default=False, help='嵌入是否冻结')
-    # parse.add_argument('-num-head', type=int, default=8, help='多头注意力机制的头数')
-    # parse.add_argument('-dim-embedding', type=int, default=128, help='词（残基）向量的嵌入维度')
-    # parse.add_argument('-dim-feedforward', type=int, default=32, help='词（残基）向量的嵌入维度')
-    # parse.add_argument('-dim-k', type=int, default=32, help='k/q向量的嵌入维度')
-    # parse.add_argument('-dim-v', type=int, default=32, help='v向量的嵌入维度')
 
     # TextCNN 模型参数
     parse.add_argument('-dim-embedding', type=int, default=128, help='词（残基）向量的嵌入维度')
@@ -88,7 +71,7 @@ def get_config():
 
 
 def select_fintune_dataset(class_name):
-    base_dir = './data/ncPEP'
+    base_dir = './Datasets/ncPEP'
     path_train_data, path_test_data = None, None
     if class_name == 'Anal_canal_cancer':
         petide_class_name = '/Anal_canal_cancer'
@@ -156,23 +139,18 @@ def select_fintune_dataset(class_name):
 
 
 config = get_config()
-config.path_params = '/mnt/8t/lzs/Meta_for_ncPEP/result/different_quantity_experiment/meta_train_quantity_54/model/MIMML, Epoch[250.000].pt'
-# config.path_params = './result/meta_train_ncPEP_7_3/model/MIMML, Epoch[250.000].pt'
+config.path_params = ''
 config.data_name = "Prostate_cancer"
 path_train_data, path_test_data = select_fintune_dataset(config.data_name)
 config.device = 1
-config.model_save_name = 'diff_quantity_few_shot_Prostate_54' + config.data_name
+config.model_save_name = '' + config.data_name
 
 config.inference_shot = int(5)  # TODO: 训练集数量 （正类或负类）
 config.inference_query = 210  # 测试集数量 （正类或负类）
 config.dataset = 'inference dataset'
 config.inference_way = 2
 
-# config.learn_name = 'meta_finetune'
-# config.learn_name = 'seek_model_parameter'
-# config.learn_name = 'ncPEP_meta_CE_model'
-# config.learn_name = 'ncPEP_metaTrain_finetune_CL'
-config.learn_name = 'diff_quantity_few_shot'
+# config.learn_name = ''
 
 config.batch_size = 8
 config.test_batch_size = 8
