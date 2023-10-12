@@ -59,18 +59,7 @@ def get_config():
     # Focal Loss参数
     parse.add_argument('-gamma', type=float, default=2, help='gamma in Focal Loss')
     parse.add_argument('-alpha', type=float, default=0.01, help='alpha in Focal Loss')
-
-    # Transformer Encoder 模型参数
-    # # parse.add_argument('-num-layer', type=int, default=3, help='Transformer的Encoder模块的堆叠层数')
-    # parse.add_argument('-num-layer', type=int, default=6, help='Transformer的Encoder模块的堆叠层数')
-    # parse.add_argument('-dropout', type=float, default=0.5, help='dropout率')
-    # parse.add_argument('-static', type=bool, default=False, help='嵌入是否冻结')
-    # parse.add_argument('-num-head', type=int, default=8, help='多头注意力机制的头数')
-    # parse.add_argument('-dim-embedding', type=int, default=128, help='词（残基）向量的嵌入维度')
-    # parse.add_argument('-dim-feedforward', type=int, default=32, help='词（残基）向量的嵌入维度')
-    # parse.add_argument('-dim-k', type=int, default=32, help='k/q向量的嵌入维度')
-    # parse.add_argument('-dim-v', type=int, default=32, help='v向量的嵌入维度')
-
+    
     # TextCNN 模型参数
     parse.add_argument('-dim-embedding', type=int, default=128, help='词（残基）向量的嵌入维度')
     parse.add_argument('-dropout', type=float, default=0.5, help='dropout率')
@@ -86,7 +75,7 @@ def get_config():
 
 
 def select_fintune_dataset(class_name):
-    base_dir = './data/ncPEP'
+    base_dir = './Datasets/ncPEP'
     path_train_data, path_test_data = None, None
     if class_name == 'Anal_canal_cancer':
         petide_class_name = '/Anal_canal_cancer'
@@ -154,7 +143,7 @@ def select_fintune_dataset(class_name):
 
 
 def select_sORFs_fintune_dataset(class_name):
-    base_dir = './data/sORFs_finetune_dataset'
+    base_dir = './Datasets/sORFs_finetune_dataset'
     path_train_data, path_test_data = None, None
     if class_name == 'Anal_canal_cancer_sORFs':
         sORFs_class_name = '/Anal_canal_cancer_sORFs'
@@ -225,8 +214,8 @@ config = get_config()
 # config.path_params = './result/meta_train_ncPEP_7_3/model/MIMML, Epoch[250.000].pt'
 config.data_name = "ACPred-FL"
 # path_train_data, path_test_data = select_fintune_dataset(config.data_name)
-path_train_data = './data/ncPEP/ACPred-FL/training dataset.tsv'
-path_test_data = './data/ncPEP/ACPred-FL/testing dataset.tsv'
+path_train_data = './Datasets/ncPEP/ACPred-FL/training dataset.tsv'
+path_test_data = './Datasets/ncPEP/ACPred-FL/testing dataset.tsv'
 config.device = 2
 # config.learn_name = 'meta_finetune'
 # config.learn_name = 'seek_model_parameter'
