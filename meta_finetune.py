@@ -15,13 +15,11 @@ def get_config():
     parse.add_argument('-seed', type=int, default=50)
 
     # 路径参数
-    parse.add_argument('-path-token2index', type=str, default='./data/residue2idx.pkl', help='保存字典的位置')
-    parse.add_argument('-path-sORFtoken2index', type=str, default='./data/nucleotide2idx.pkl',
+    parse.add_argument('-path-token2index', type=str, default='./Dataset/residue2idx.pkl', help='保存字典的位置')
+    parse.add_argument('-path-sORFtoken2index', type=str, default='./Dataset/nucleotide2idx.pkl',
                        help='保存核苷酸字典的位置')
-    parse.add_argument('-path-train-data', type=str, default='./data/task_data/IL-6/Train.tsv', help='训练数据的位置')
-    parse.add_argument('-path-test-data', type=str, default='./data/task_data/IL-6/Validate.tsv', help='测试数据的位置')
-    # parse.add_argument('-path-dataset', type=str, default='./data/task_data/Meta Dataset/BPD-ALL-RT',
-    #                    help='多分类训练数据的位置')
+    parse.add_argument('-path-train-data', type=str, default='', help='训练数据的位置')
+    parse.add_argument('-path-test-data', type=str, default='', help='测试数据的位置')
     parse.add_argument('-path-params', type=str, default=None, help='模型参数路径')
     parse.add_argument('-path-save', type=str, default='./result/', help='保存字典的位置')
     parse.add_argument('-model-save-name', type=str, default='CNN', help='保存模型的命名')
@@ -29,9 +27,8 @@ def get_config():
 
     # 数据参数
     parse.add_argument('-num-class', type=int, default=2, help='类别数量')
-    # parse.add_argument('-num-class', type=int, default=24, help='类别数量')
-    # parse.add_argument('-max-len', type=int, default=52, help='max length of input sequences')
-    parse.add_argument('-max-len', type=int, default=209, help='max length of input sequences')
+    parse.add_argument('-max-len', type=int, default=52, help='max length of input sequences')
+    # parse.add_argument('-max-len', type=int, default=209, help='max length of input sequences')
     # parse.add_argument('-dataset', type=str, default='RNA Sequence', help='数据集名称')
     parse.add_argument('-dataset', type=str, default='Peptide Sequence', help='数据集')
 
@@ -42,14 +39,11 @@ def get_config():
     parse.add_argument('-interval-log', type=int, default=40, help='经过多少batch记录一次训练状态')
     parse.add_argument('-interval-valid', type=int, default=1, help='经过多少epoch对交叉验证集进行测试')
     parse.add_argument('-interval-test', type=int, default=1, help='经过多少epoch对测试集进行测试')
-    # parse.add_argument('-metric', type=str, default='MCC', help='评估指标名称')
     parse.add_argument('-metric', type=str, default='MCC', help='评估指标名称')
-    # parse.add_argument('-threshold', type=float, default=0.45, help='指标率阈值')
     parse.add_argument('-threshold', type=float, default=0.40, help='指标率阈值')
 
     # 训练参数
     parse.add_argument('-model', type=str, default='TextCNN', help='模型名称')
-    # parse.add_argument('-model', type=str, default='Transformer Encoder', help='模型名称')
     # parse.add_argument('-optimizer', type=str, default='AdamW', help='优化器名称')
     parse.add_argument('-optimizer', type=str, default='AdamW', help='优化器名称')
     parse.add_argument('-loss-func', type=str, default='contrast loss', help='损失函数名称, CE/contrast loss')
